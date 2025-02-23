@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link rel="icon" href="./images/olxbrowserlogo.jpg">
+    <title>Tablets - OLX</title>
+    <style>
+      /* Add this style section in the head or your CSS file */
+      .product-card {
+        margin-bottom: 20px;
+      }
+      
+      .product-card .image-container {
+        width: 280px !important;  /* Increased from 200px */
+      }
+      
+      .product-card img {
+        width: 100%;
+        height: 280px !important;  /* Increased from 200px */
+        object-fit: contain;
+      }
+      
+      .product-card h3 {
+        font-size: 1.8rem !important;  /* Increased text size */
+      }
+      
+      .product-card p {
+        font-size: 1.2rem !important;  /* Increased text size */
+      }
+      
+      .product-card .btn {
+        font-size: 1.1rem !important;  /* Increased button text */
+        min-width: 120px !important;   /* Slightly wider buttons */
+      }
+    </style>
+</head>
+<body>
+    
+ <!-- NavBar -->
+
+ <nav class="header container-fluid">
+    <div class="nav-bar container">
+      <div class="first-nav row">
+        <div class="logo col col-2 col-sm-2 col-md-2 col-lg-1 col-xl-1">
+          <a href="./index.html">
+            <img src="./images/OLX-Logo.png" class="first-nav-img">
+          </a>
+        </div>
+
+        <div class=" col col-4 col-sm-4 col-md-3 col-lg-2 col-xl-2">
+          <div class="Motors">
+            <a href="#" class="Car">
+              <i class="fa-solid fa-car-rear"></i>
+              <p>MOTORS</p>
+            </a>
+          </div>
+        </div>
+
+        <div class="col col-4 col-sm-4 col-md-3 col-lg-2 col-xl-2">
+          <div class="property">
+            <a href="#" class="building">
+              <i class="ri-building-fill"></i>
+              <p>PROPERTY</p>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===toogle=== -->
+      <div class="row">
+        <div class="toogle col col-12 col-sm-12 col-md-1 col-lg-1 col-xl-1">
+          <nav class="navbar ">
+            <div class="container">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            </div>
+          </nav>
+        </div>
+        <div class="toogle1 col col-12 col-sm-12 col-md-11 col-lg-11 col-xl-11">
+          <div class="collapse" id="navbarToggleExternalContent">
+            <div class="second-nav row">
+              <div class="logo1 col col-4 col-sm-2 col-md-2 col-lg-1">
+                <img src="./images/Logotyp_OLX_.png" class="olxlogo">
+              </div>
+
+              <div class="select col col-8 col-sm-4 col-md-3 col-lg-3">
+                <input type="search" class="searchclass mt-1 ps-4" placeholder="Search Location">
+              </div>
+
+              <div class="search_box col col-12 col-sm-6 col-md-4 col-lg-5">
+                <input type="text" class="searchclass mt-1" placeholder="Find Cars, mobile phone and More....">
+                <i class="fa-solid fa-magnifying-glass mt-1"></i>
+              </div>
+
+              <div class=" col col-3 col-sm-3 col-md-1 col-lg-1">
+                <div class="login">
+                  <a id="log" href="./login.html">Login</a>
+                </div>
+              </div>
+
+              <div class="col col-3 col-sm-3 col-md-2 col-lg-2">
+                <div class="selling_page" onclick="forSell()">
+                  <button>
+                    <i class="fa-solid fa-plus "></i>
+                    <p>SELL</p>
+                  </button>
+                </div>
+                <button class="navbar-toggler" data-toggle="collapse" data-target="#olxNavbar"><span
+                    class="navbar-toggler-icon"></span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+
+
+      <!-- =========toogle==== -->
+
+
+    </div>
+  </nav>
+
+
+
+  <!-- categories -->
+
+  <div class="categories container-fluid">
+    <div class="categories-div container">
+      <div>
+        <ul class="categories-list col ">
+          <li class="nav-item col" id="Cat-list">
+            <a class="nav-link dropdown-toggle avtive" id="nav-link" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              ALL CATEGORIES
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Mobile</a></li>
+              <li><a class="dropdown-item" href="#">Cars</a></li>
+              <li><a class="dropdown-item" href="#">Motorcycles</a></li>
+              <li><a class="dropdown-item" href="#">Houses</a></li>
+              <li><a class="dropdown-item" href="./tv-video-audio.html">TV-Video-Audio</a></li>
+              <li><a class="dropdown-item" href="./tablets.html">Tablets</a></li>
+              <li><a class="dropdown-item" href="./land-and-plots.html">Land & Plots</a></li>
+            </ul>
+          </li>
+          <li class="nav-item col ">
+            <a class="nav-link" href="#">Mobile Phones</a>
+          </li>
+          <li class="nav-item col">
+            <a class="nav-link" href="#">Cars</a>
+          </li>
+          <li class="nav-item col">
+            <a class="nav-link" href="#">Motorcycles</a>
+          </li>
+          <li class="nav-item col">
+            <a class="nav-link" href="#">Houses</a>
+          </li>
+          <li class="nav-item col">
+            <a class="nav-link" href="./tv-video-audio.html">TV-Video-Audio</a>
+          </li>
+          <li class="nav-item col">
+            <a class="nav-link" href="./tablets.html">Tablets</a>
+          </li>
+          <li class="nav-item col">
+            <a class="nav-link" href="./land-and-plots.html">Land & Plots</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ads -->
+
+  <div id="carouselExampleSlidesOnly" class="container carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="./images/Nimg.webp" class="d-block w-100">
+      </div>
+      <div class="carousel-item">
+        <img src="./images/Nimg.webp" class="d-block w-100">
+      </div>
+      <div class="carousel-item">
+        <img src="./images/Nimg.webp" class="d-block w-100">
+      </div>
+    </div>
+  </div>
+
+ <!-- Breadcrumb -->
+ <div class="container mt-4">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-muted">Home</a></li>
+        <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-muted">Electronics & Home Appliances</a></li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- Product Listings -->
+  <div class="container">
+    <div class="row">
+      <!-- Categories Sidebar -->
+      <div class="col-md-3">
+        <div class="card bg-light">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Categories</h5>
+            
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="#" class="text-muted text-decoration-none">All categories</a></li>
+              
+              <li class="mb-2">
+                <a href="#" class="text-muted text-decoration-none">Electronics & Home Appliances</a>
+              </li>
+              
+              <li class="mb-2">
+                <a href="#" class="text-dark fw-bold text-decoration-none">
+                  Video-Audios <span class="text-muted">(6065)</span>
+                </a>
+              </li>
+              
+              <li class="ms-3 mb-2">
+                <a href="#" class="text-muted text-decoration-none">
+                  Speakers <span>(2334)</span>
+                </a>
+              </li>
+              
+              <li class="ms-3 mb-2">
+                <a href="#" class="text-muted text-decoration-none">
+                  Amplifiers <span>(661)</span>
+                </a>
+              </li>
+              
+              <li class="ms-3 mb-2">
+                <a href="#" class="text-muted text-decoration-none">
+                  Microphones <span>(481)</span>
+                </a>
+              </li>
+              
+              <li class="mb-2">
+                <a class="text-primary text-decoration-none">View more</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Location Section -->
+        <div class="card bg-light">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Location</h5>
+            
+            <div class="dropdown mb-3">
+              <button class="btn btn-light border w-100 text-start d-flex justify-content-between align-items-center" type="button">
+                Pakistan
+                <i class="fas fa-chevron-down"></i>
+              </button>
+            </div>
+
+            <div class="mb-2">Pakistan</div>
+            <ul class="list-unstyled">
+              <li class="mb-2">Punjab (3664)</li>
+              <li class="mb-2">Sindh (1636)</li>
+              <li class="mb-2">Islamabad Capital Territory (484)</li>
+              <li class="mb-2">Khyber Pakhtunkhwa (217)</li>
+              <li class="mb-2">Balochistan (40)</li>
+              <li class="mb-2">Azad Kashmir (15)</li>
+              <li class="mb-2">Northern Areas (7)</li>
+            </ul>
+
+            <h5 class="mt-4 mb-3">Price</h5>
+            <div class="d-flex gap-2">
+              <input type="text" class="form-control" placeholder="100" value="100">
+              <input type="text" class="form-control" placeholder="5,000,000" value="5,000,000">
+            </div>
+            <div class="d-flex gap-2 mt-1">
+              <small class="text-muted">PKR 100</small>
+              <small class="text-muted">PKR 50 Lacs</small>
+            </div>
+
+            <!-- Brand Filter Section -->
+            <h5 class="mt-4 mb-3">Brand</h5>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="apple">
+              <label class="form-check-label" for="apple">
+                Apple (2149)
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="samsung">
+              <label class="form-check-label" for="samsung">
+                Samsung (851)
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="otherTablets">
+              <label class="form-check-label" for="otherTablets">
+                Other Tablets (668)
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="lenovo">
+              <label class="form-check-label" for="lenovo">
+                Lenovo (311)
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="amazon">
+              <label class="form-check-label" for="amazon">
+                Amazon (227)
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="huawei">
+              <label class="form-check-label" for="huawei">
+                Huawei (178)
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="asus">
+              <label class="form-check-label" for="asus">
+                Asus (43)
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="alcatel">
+              <label class="form-check-label" for="alcatel">
+                Alcatel (40)
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content Area -->
+      <div class="col-md-9">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2 class="mb-0">Tablets in Pakistan <span class="badge bg-info">4,565 ads</span></h2>
+          <div class="d-flex align-items-center">
+            <span class="me-2">VIEW</span>
+            <div class="btn-group me-3">
+              <button class="btn btn-outline-secondary"><i class="fas fa-list"></i></button>
+              <button class="btn btn-outline-secondary"><i class="fas fa-th"></i></button>
+            </div>
+            <div class="dropdown">
+              <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                SORT BY: Newly listed
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Featured Product Card -->
+          <div class="col-12">
+            <div class="card border rounded w-100 product-card">
+              <div class="d-flex">
+                <!-- Left side - Image -->
+                <div class="position-relative image-container">
+                  <span class="badge bg-warning position-absolute" style="top: 10px; left: 10px; z-index: 1;">Featured</span>
+                  <img src="https://images.olx.com.pk/thumbnails/489319177-800x600.jpeg" alt="TV Video Audio">
+                </div>
+                
+                <!-- Right side - Content -->
+                <div class="p-3 flex-grow-1">
+                  <div class="d-flex justify-content-between align-items-start w-100">
+                    <div>
+                      <h3 class="fw-bold mb-1">Rs 7,999</h3>
+                      <p class="mb-2">Tabs for office work cheap price</p>
+                      <p class="text-muted small mb-3">Gulberge 3, Rawalpindi • 2 weeks ago</p>
+                    </div>
+                    <button class="btn btn-link border-0 p-0">
+                      <i class="far fa-heart"></i>
+                    </button>
+                  </div>
+                  
+                  <div class="mt-2">
+                    <button class="btn btn-outline-dark me-2" style="min-width: 100px;">
+                      <i class="fas fa-phone me-2"></i>Call
+                    </button>
+                    <button class="btn text-white" style="background-color: #002f34; min-width: 100px;">
+                      <i class="fas fa-comment me-2"></i>Chat
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Product Cards -->
+        <div class="card border rounded w-100 product-card">
+          <div class="d-flex">
+            <!-- Left side - Image -->
+            <div class="position-relative image-container">
+              <span class="badge bg-warning position-absolute" style="top: 10px; left: 10px; z-index: 1;">Featured</span>
+              <img src="https://images.olx.com.pk/thumbnails/504526476-800x600.jpeg" 
+                   alt="SMD LED Screen">
+            </div>
+            
+            <!-- Right side - Content -->
+            <div class="p-3 flex-grow-1">
+              <div class="d-flex justify-content-between align-items-start w-100">
+                <div>
+                  <h3 class="fw-bold mb-1">Rs 9,500</h3>
+                  <p class="mb-2">Samsung Tab All Models Available</p>
+                  <p class="text-muted small mb-3">Saddar, Rawalpindi• 3 weeks ago</p>
+                </div>
+                <button class="btn btn-link border-0 p-0">
+                  <i class="far fa-heart"></i>
+                </button>
+              </div>
+              
+              <div class="mt-2">
+                <button class="btn btn-outline-dark me-2" style="min-width: 100px;">
+                  <i class="fas fa-phone me-2"></i>Call
+                </button>
+                <button class="btn text-white" style="background-color: #002f34; min-width: 100px;">
+                  <i class="fas fa-comment me-2"></i>Chat
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card border rounded w-100 product-card">
+          <div class="d-flex">
+            <!-- Left side - Image -->
+            <div class="position-relative image-container">
+              <span class="badge bg-warning position-absolute" style="top: 10px; left: 10px; z-index: 1;">Featured</span>
+              <img src="https://images.olx.com.pk/thumbnails/520399735-800x600.jpeg" 
+                   alt="Baofeng BF-888s">
+            </div>
+            
+            <!-- Right side - Content -->
+            <div class="p-3 flex-grow-1">
+              <div class="d-flex justify-content-between align-items-start w-100">
+                <div>
+                  <h3 class="fw-bold mb-1">Rs 54,999</h3>
+                  <p class="mb-2">Samsung Galaxy Tab S6 Lite 10.4 Display 4gb 64gb rom</p>
+                  <p class="text-muted small mb-3">DHA Phase 1, Karachi • 4 weeks ago</p>
+                </div>
+                <button class="btn btn-link border-0 p-0">
+                  <i class="far fa-heart"></i>
+                </button>
+              </div>
+              
+              <div class="mt-2">
+                <button class="btn btn-outline-dark me-2" style="min-width: 100px;">
+                  <i class="fas fa-phone me-2"></i>Call
+                </button>
+                <button class="btn text-white" style="background-color: #002f34; min-width: 100px;">
+                  <i class="fas fa-comment me-2"></i>Chat
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card border rounded w-100 product-card">
+          <div class="d-flex">
+            <!-- Left side - Image -->
+            <div class="position-relative image-container">
+              <span class="badge bg-warning position-absolute" style="top: 10px; left: 10px; z-index: 1;">Featured</span>
+              <img src="https://images.olx.com.pk/thumbnails/520175516-800x600.jpeg" 
+                   alt="Walkie Talkie">
+            </div>
+            
+            <!-- Right side - Content -->
+            <div class="p-3 flex-grow-1">
+              <div class="d-flex justify-content-between align-items-start w-100">
+                <div>
+                  <h3 class="fw-bold mb-1">Rs 8,999</h3>
+                  <p class="mb-2">HP EllitePad G1</p>
+                  <p class="text-muted small mb-3">Jail Road , Faislabad • 2 weeks ago</p>
+                </div>
+                <button class="btn btn-link border-0 p-0">
+                  <i class="far fa-heart"></i>
+                </button>
+              </div>
+              
+              <div class="mt-2">
+                <button class="btn btn-outline-dark me-2" style="min-width: 100px;">
+                  <i class="fas fa-phone me-2"></i>Call
+                </button>
+                <button class="btn text-white" style="background-color: #002f34; min-width: 100px;">
+                  <i class="fas fa-comment me-2"></i>Chat
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Product Card -->
+        <div class="card border rounded w-100 product-card">
+          <div class="d-flex">
+            <!-- Left side - Image -->
+            <div class="position-relative image-container">
+              <span class="badge bg-warning position-absolute" style="top: 10px; left: 10px; z-index: 1;">Featured</span>
+              <img src="https://images.olx.com.pk/thumbnails/519875123-800x600.jpeg" 
+                   alt="iPad Pro">
+            </div>
+            
+            <!-- Right side - Content -->
+            <div class="p-3 flex-grow-1">
+              <div class="d-flex justify-content-between align-items-start w-100">
+                <div>
+                  <h3 class="fw-bold mb-1">Rs 125,000</h3>
+                  <p class="mb-2">iPad Pro 11 inch 2021 M1 Chip 128GB WiFi Only</p>
+                  <p class="text-muted small mb-3">Bahria Town, Lahore • 1 week ago</p>
+                </div>
+                <button class="btn btn-link border-0 p-0">
+                  <i class="far fa-heart"></i>
+                </button>
+              </div>
+              
+              <div class="mt-2">
+                <button class="btn btn-outline-dark me-2" style="min-width: 100px;">
+                  <i class="fas fa-phone me-2"></i>Call
+                </button>
+                <button class="btn text-white" style="background-color: #002f34; min-width: 100px;">
+                  <i class="fas fa-comment me-2"></i>Chat
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Product Card -->
+        <div class="card border rounded w-100 product-card">
+          <div class="d-flex">
+            <!-- Left side - Image -->
+            <div class="position-relative image-container">
+              <span class="badge bg-warning position-absolute" style="top: 10px; left: 10px; z-index: 1;">Featured</span>
+              <img src="https://images.olx.com.pk/thumbnails/520175516-800x600.jpeg" 
+                   alt="Samsung Tablet">
+            </div>
+            
+            <!-- Right side - Content -->
+            <div class="p-3 flex-grow-1">
+              <div class="d-flex justify-content-between align-items-start w-100">
+                <div>
+                  <h3 class="fw-bold mb-1">Rs 45,999</h3>
+                  <p class="mb-2">Samsung Galaxy Tab A8 10.5" 4GB RAM 64GB Storage</p>
+                  <p class="text-muted small mb-3">Gulshan-e-Iqbal, Karachi • 3 days ago</p>
+                </div>
+                <button class="btn btn-link border-0 p-0">
+                  <i class="far fa-heart"></i>
+                </button>
+              </div>
+              
+              <div class="mt-2">
+                <button class="btn btn-outline-dark me-2" style="min-width: 100px;">
+                  <i class="fas fa-phone me-2"></i>Call
+                </button>
+                <button class="btn text-white" style="background-color: #002f34; min-width: 100px;">
+                  <i class="fas fa-comment me-2"></i>Chat
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+       
+
+
+
+  <!-- footer -->
+  <div class="footer1 container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="footerimg col col-6 col-sm-6 col-md-4">
+          <img src="./images/Fimg.webp" alt="">
+        </div>
+        <div class="footercontent col col-6 col-sm-6 col-md-4">
+          <h2 class="mt-3">TRY THE OLX APP</h2>
+          <p>Buy, sell and find just about anything using the app on your mobile.</p>
+        </div>
+        <div class="footerapp col col-12 col-sm-12 col-md-4">
+          <div>
+            <p class="mt-5">GET YOUR APP Today</p>
+          </div>
+          <img src="./images/appicon1.svg" alt="">
+          <img src="./images/appicon2.svg" alt="">
+          <img src="./images/appicon3.svg" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer2 container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="footer2content col col-6 col-sm-4 col-md-2">
+          <h5 class="mt-3">POPULAR CATEGORIES</h5>
+          <p>Cars</p>
+          <p>Flats for rent</p>
+          <p>Mobile Phones</p>
+          <p>Jobs</p>
+        </div>
+        <div class="footer2content col col-6 col-sm-4 col-md-2">
+          <h5 class="mt-3">TRENDING SEARCHES</h5>
+          <p>Bikes</p>
+          <p>Watches</p>
+          <p>Books</p>
+          <p>Dogs</p>
+        </div>
+        <div class="footer2content col col-6 col-sm-4 col-md-3">
+          <h5 class="mt-3">ABOUT US</h5>
+          <p>About EMPG</p>
+          <p>OLX Blog</p>
+          <p>Contact US</p>
+          <p>OLX for Businesses</p>
+        </div>
+        <div class="footer2content col col-6 col-sm-4 col-md-2">
+          <h5 class="mt-3">OLX</h5>
+          <p>Help</p>
+          <p>Sitemap</p>
+          <p>Terms of use</p>
+          <p>Privacy Policy</p>
+        </div>
+        <div class="footerapp2 col col-12 col-sm-6 col-md-3">
+          <div>
+            <p class="mt-3">FOLLOW US</p>
+          </div>
+          <div>
+            <img src="./images/F1.svg" class="footerappimg">
+            <img src="./images/F2.svg" class="footerappimg">
+            <img src="./images/F3.svg" class="footerappimg">
+            <img src="./images/F4.svg" class="footerappimg">
+          </div>
+          <div>
+            <img src="./images/appicon1.svg" class="footerappimg2">
+            <img src="./images/appicon2.svg" class="footerappimg2">
+            <img src="./images/appicon3.svg" class="footerappimg2">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer3 container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col col-12">
+          <p> <b> Free Classifieds in Pakistan </b>. © 2006-2022 OLX</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="main.js"></script>
+  <script src="app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+</body>
+</html> 
