@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link rel="icon" href="./images/olxbrowserlogo.jpg">
+    <title>Cars - OLX</title>
+    <style>
+      /* Add this style section in the head or your CSS file */
+      .product-card {
+        margin-bottom: 20px;
+      }
+      
+      .product-card .image-container {
+        width: 280px !important;  /* Increased from 200px */
+      }
+      
+      .product-card img {
+        width: 100%;
+        height: 280px !important;  /* Increased from 200px */
+        object-fit: contain;
+      }
+      
+      .product-card h3 {
+        font-size: 1.8rem !important;  /* Increased text size */
+      }
+      
+      .product-card p {
+        font-size: 1.2rem !important;  /* Increased text size */
+      }
+      
+      .product-card .btn {
+        font-size: 1.1rem !important;  /* Increased button text */
+        min-width: 120px !important;   /* Slightly wider buttons */
+      }
+
+      .search-box .form-control {
+        padding-right: 30px;
+      }
+
+      .brand-list {
+        max-height: 300px;
+        overflow-y: auto;
+      }
+
+      .brand-list::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      .brand-list::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+
+      .brand-list::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 5px;
+      }
+
+      .form-check label {
+        color: #002f34;
+        cursor: pointer;
+      }
+
+      .form-check:hover {
+        background-color: #f8f9fa;
+      }
+
+      .condition-list .form-check {
+        padding: 8px 0;
+      }
+
+      .condition-list .form-check:hover {
+        background-color: #f8f9fa;
+        cursor: pointer;
+      }
+
+      .condition-list .form-check-input {
+        cursor: pointer;
+      }
+
+      .condition-list .form-check-label {
+        color: #002f34;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      .condition-list {
+        padding: 0;
+      }
+
+      .condition-list .form-check {
+        margin: 0;
+        padding: 0 0 0 1.8rem;
+        border-radius: 4px;
+      }
+
+      .condition-list .form-check:hover {
+        background-color: #f8f9fa;
+      }
+
+      .condition-list .form-check-input {
+        margin-top: 0.7rem;
+        margin-left: -1.5rem;
+        cursor: pointer;
+      }
+
+      .condition-list .form-check-input:checked {
+        background-color: #002f34;
+        border-color: #002f34;
+      }
+
+      .condition-list .form-check-label {
+        color: #002f34;
+        cursor: pointer;
+        font-size: 15px;
+        padding: 8px 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .condition-list .text-muted {
+        font-size: 14px;
+        color: #666 !important;
+      }
+
+      .custom-checkbox {
+        transition: all 0.2s ease;
+      }
+
+      .custom-checkbox:hover {
+        transform: translateX(2px);
+      }
+
+      .image-container {
+        width: 200px;
+        height: 200px;
+        overflow: hidden;
+        margin-right: 15px;
+      }
+
+      .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .image-container img:hover {
+        transform: scale(1.05);
+      }
+
+      .product-card {
+        margin-bottom: 15px;
+        transition: box-shadow 0.3s ease;
+      }
+
+      .product-card:hover {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      }
+
+      /* Custom styling for filters */
+      .condition-filters .form-check {
+        padding: 8px 12px;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+      }
+
+      .condition-filters .form-check:hover {
+        background-color: #f8f9fa;
+        transform: translateX(2px);
+      }
+
+      .condition-filters .form-check-input {
+        cursor: pointer;
+      }
+
+      .condition-filters .form-check-input:checked {
+        background-color: #002f34;
+        border-color: #002f34;
+      }
+
+      .condition-filters .form-check-label {
+        cursor: pointer;
+        font-size: 14px;
+        color: #002f34;
+      }
+
+      .km-range input, .year-range input {
+        padding: 8px 12px;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+
+      .km-range input:focus, .year-range input:focus {
+        border-color: #002f34;
+        box-shadow: 0 0 0 0.2rem rgba(0, 47, 52, 0.25);
+      }
+
+      .km-range small, .year-range small {
+        font-size: 12px;
+        color: #6c757d;
+        margin-top: 4px;
+        display: block;
+      }
+
+      /* Remove arrows from number inputs */
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      input[type="number"] {
+        -moz-appearance: textfield;
+      }
+
+      /* Additional styles for new sections */
+      .fuel-filters .form-check,
+      .transmission-filters .form-check {
+        padding: 8px 12px;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+      }
+
+      .fuel-filters .form-check:hover,
+      .transmission-filters .form-check:hover {
+        background-color: #f8f9fa;
+        transform: translateX(2px);
+      }
+
+      .fuel-filters .form-check-input,
+      .transmission-filters .form-check-input {
+        cursor: pointer;
+      }
+
+      .fuel-filters .form-check-input:checked,
+      .transmission-filters .form-check-input:checked {
+        background-color: #002f34;
+        border-color: #002f34;
+      }
+
+      .fuel-filters .form-check-label,
+      .transmission-filters .form-check-label {
+        cursor: pointer;
+        font-size: 14px;
+        color: #002f34;
+      }
+
+      /* Additional styles for body type section */
+      .body-type-filters .form-check {
+        padding: 8px 12px;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+      }
+
+      .body-type-filters .form-check:hover {
+        background-color: #f8f9fa;
+        transform: translateX(2px);
+      }
+
+      .body-type-filters .form-check-input {
+        cursor: pointer;
+      }
+
+      .body-type-filters .form-check-input:checked {
+        background-color: #002f34;
+        border-color: #002f34;
+      }
+
+      .body-type-filters .form-check-label {
+        cursor: pointer;
+        font-size: 14px;
+        color: #002f34;
+      }
+
+      /* Additional styles for features section */
+      .features-filters .form-check {
+        padding: 8px 12px;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+      }
+
+      .features-filters .form-check:hover {
+        background-color: #f8f9fa;
+        transform: translateX(2px);
+      }
+
+      .features-filters .form-check-input {
+        cursor: pointer;
+      }
+
+      .features-filters .form-check-input:checked {
+        background-color: #002f34;
+        border-color: #002f34;
+      }
+
+      .features-filters .form-check-label {
+        cursor: pointer;
+        font-size: 14px;
+        color: #002f34;
+      }
+
+      .view-more a, .technical-details a {
+        color: #3a77ff !important;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+      }
+
+      .view-more a:hover, .technical-details a:hover {
+        color: #2557d6 !important;
+        transform: translateX(2px);
+      }
+    </style>
+</head>
+<body>
+    
+ <!-- NavBar -->
+
+ <nav class="header container-fluid">
+    <div class="nav-bar container">
+      <div class="first-nav row">
+        <div class="logo col col-2 col-sm-2 col-md-2 col-lg-1 col-xl-1">
+          <a href="./index.html">
+            <img src="./images/OLX-Logo.png" class="first-nav-img">
+          </a>
+        </div>
+
+        <div class=" col col-4 col-sm-4 col-md-3 col-lg-2 col-xl-2">
+          <div class="Motors">
+            <a href="#" class="Car">
+              <i class="fa-solid fa-car-rear"></i>
+              <p>MOTORS</p>
+            </a>
+          </div>
+        </div>
+
+        <div class="col col-4 col-sm-4 col-md-3 col-lg-2 col-xl-2">
+          <div class="property">
+            <a href="#" class="building">
+              <i class="ri-building-fill"></i>
+              <p>PROPERTY</p>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===toogle=== -->
+      <div class="row">
+        <div class="toogle col col-12 col-sm-12 col-md-1 col-lg-1 col-xl-1">
+          <nav class="navbar ">
+            <div class="container">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            </div>
+          </nav>
+        </div>
+        <div class="toogle1 col col-12 col-sm-12 col-md-11 col-lg-11 col-xl-11">
+          <div class="collapse" id="navbarToggleExternalContent">
+            <div class="second-nav row">
+              <div class="logo1 col col-4 col-sm-2 col-md-2 col-lg-1">
+                <img src="./images/Logotyp_OLX_.png" class="olxlogo">
+              </div>
+
+              <div class="select col col-8 col-sm-4 col-md-3 col-lg-3">
+                <input type="search" class="searchclass mt-1 ps-4" placeholder="Search Location">
+              </div>
+
+              <div class="search_box col col-12 col-sm-6 col-md-4 col-lg-5">
+                <input type="text" class="searchclass mt-1" placeholder="Find Cars, mobile phone and More....">
+                <i class="fa-solid fa-magnifying-glass mt-1"></i>
+              </div>
+
+              <div class=" col col-3 col-sm-3 col-md-1 col-lg-1">
+                <div class="login">
+                  <a id="log" href="./login.html">Login</a>
+                </div>
+              </div>
+
+              <div class="col col-3 col-sm-3 col-md-2 col-lg-2">
+                <div class="selling_page" onclick="forSell()">
+                  <button>
+                    <i class="fa-solid fa-plus "></i>
+                    <p>SELL</p>
+                  </button>
+                </div>
+                <button class="navbar-toggler" data-toggle="collapse" data-target="#olxNavbar"><span
+                    class="navbar-toggler-icon"></span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+
+
+      <!-- =========toogle==== -->
+
+
+    </div>
+  </nav>
+
+
+
+  <!-- categories -->
+
+  <div class="categories container-fluid">
+    <div class="categories-div container">
+      <div>
+        <ul class="categories-list col ">
+          <li class="nav-item col" id="Cat-list">
+            <a class="nav-link dropdown-toggle avtive" id="nav-link" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              ALL CATEGORIES
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Mobile</a></li>
+              <li><a class="dropdown-item" href="#">Cars</a></li>
+              <li><a class="dropdown-item" href="#">Motorcycles</a></li>
+              <li><a class="dropdown-item" href="#">Houses</a></li>
+              <li><a class="dropdown-item" href="./tv-video-audio.html">TV-Video-Audio</a></li>
+              <li><a class="dropdown-item" href="./tablets.html">Tablets</a></li>
+              <li><a class="dropdown-item" href="./land-and-plots.html">Land & Plots</a></li>
+            </ul>
+          </li>
+          <li class="nav-item col ">
+            <a class="nav-link" href="#">Mobile Phones</a>
+          </li>
+          <li class="nav-item col">
+            <a class="nav-link" href="#">Cars</a>
+          </li>
+          <li class="nav-item col">
+            <a class="nav-link" href="#">Motorcycles</a>
+          </li>
+          <li class="nav-item col">
+            <a class="nav-link" href="#">Houses</a>
+          </li>
+          <li class="nav-item col">
+            <a class="nav-link" href="./tv-video-audio.html">TV-Video-Audio</a>
+          </li>
+          <li class="nav-item col">
+            <a class="nav-link" href="./tablets.html">Tablets</a>
+          </li>
+          <li class="nav-item col">
+            <a class="nav-link" href="./land-and-plots.html">Land & Plots</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ads -->
+
+  <div id="carouselExampleSlidesOnly" class="container carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="./images/Nimg.webp" class="d-block w-100">
+      </div>
+      <div class="carousel-item">
+        <img src="./images/Nimg.webp" class="d-block w-100">
+      </div>
+      <div class="carousel-item">
+        <img src="./images/Nimg.webp" class="d-block w-100">
+      </div>
+    </div>
+  </div>
+
+ <!-- Breadcrumb -->
+ <div class="container mt-4">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-muted">Home</a></li>
+        <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-muted">Electronics & Home Appliances</a></li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- Product Listings -->
+  <div class="container">
+    <div class="row">
+      <!-- Categories Sidebar -->
+      <div class="col-md-3">
+        <div class="card bg-light">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Categories</h5>
+            
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="#" class="text-muted text-decoration-none">All categories</a></li>
+              
+              <li class="mb-2">
+                <a href="#" class="text-muted text-decoration-none">Electronics & Home Appliances</a>
+              </li>
+              
+              <li class="mb-2">
+                <a href="#" class="text-dark fw-bold text-decoration-none">
+                  Video-Audios <span class="text-muted">(6065)</span>
+                </a>
+              </li>
+              
+              <li class="ms-3 mb-2">
+                <a href="#" class="text-muted text-decoration-none">
+                  Speakers <span>(2334)</span>
+                </a>
+              </li>
+              
+              <li class="ms-3 mb-2">
+                <a href="#" class="text-muted text-decoration-none">
+                  Amplifiers <span>(661)</span>
+                </a>
+              </li>
+              
+              <li class="ms-3 mb-2">
+                <a href="#" class="text-muted text-decoration-none">
+                  Microphones <span>(481)</span>
+                </a>
+              </li>
+              
+              <li class="mb-2">
+                <a class="text-primary text-decoration-none">View more</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Location Section -->
+        <div class="card bg-light">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Location</h5>
+            
+            <div class="dropdown mb-3">
+              <button class="btn btn-light border w-100 text-start d-flex justify-content-between align-items-center" type="button">
+                Pakistan
+                <i class="fas fa-chevron-down"></i>
+              </button>
+            </div>
+
+            <div class="mb-2">Pakistan</div>
+            <ul class="list-unstyled">
+              <li class="mb-2">Punjab (3664)</li>
+              <li class="mb-2">Sindh (1636)</li>
+              <li class="mb-2">Islamabad Capital Territory (484)</li>
+              <li class="mb-2">Khyber Pakhtunkhwa (217)</li>
+              <li class="mb-2">Balochistan (40)</li>
+              <li class="mb-2">Azad Kashmir (15)</li>
+              <li class="mb-2">Northern Areas (7)</li>
+            </ul>
+
+            <h5 class="mt-4 mb-3">Price</h5>
+            <div class="d-flex gap-2">
+              <input type="text" class="form-control" placeholder="100" value="100">
+              <input type="text" class="form-control" placeholder="5,000,000" value="5,000,000">
+            </div>
+            <div class="d-flex gap-2 mt-1">
+              <small class="text-muted">PKR 100</small>
+              <small class="text-muted">PKR 50 Lacs</small>
+            </div>
+
+            <!-- Brand Filter Section -->
+            <h5 class="mt-4 mb-3">Brand and Model</h5>
+            <div class="search-box mb-3">
+              <div class="position-relative">
+                <input type="text" class="form-control" placeholder="Select brand">
+                <i class="fas fa-search position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
+              </div>
+            </div>
+
+            <div class="brand-list">
+              <div class="form-check d-flex justify-content-between align-items-center mb-2">
+                <label class="form-check-label" for="motorola">
+                  Motorola
+                </label>
+                <span class="text-muted">(2774)</span>
+              </div>
+              
+              <div class="form-check d-flex justify-content-between align-items-center mb-2">
+                <label class="form-check-label" for="nokia">
+                  Nokia
+                </label>
+                <span class="text-muted">(1802)</span>
+              </div>
+              
+              <div class="form-check d-flex justify-content-between align-items-center mb-2">
+                <label class="form-check-label" for="sony">
+                  Sony
+                </label>
+                <span class="text-muted">(1655)</span>
+              </div>
+              
+              <div class="form-check d-flex justify-content-between align-items-center mb-2">
+                <label class="form-check-label" for="lg">
+                  LG
+                </label>
+                <span class="text-muted">(1250)</span>
+              </div>
+              
+              <div class="form-check d-flex justify-content-between align-items-center mb-2">
+                <label class="form-check-label" for="itel">
+                  Itel
+                </label>
+                <span class="text-muted">(1171)</span>
+              </div>
+              
+              <div class="form-check d-flex justify-content-between align-items-center mb-2">
+                <label class="form-check-label" for="honor">
+                  Honor
+                </label>
+                <span class="text-muted">(572)</span>
+              </div>
+              
+              <div class="form-check d-flex justify-content-between align-items-center mb-2">
+                <label class="form-check-label" for="zte">
+                  Zte
+                </label>
+                <span class="text-muted">(384)</span>
+              </div>
+              
+              <div class="form-check d-flex justify-content-between align-items-center mb-2">
+                <label class="form-check-label" for="mobilink">
+                  Mobilink JazzX
+                </label>
+                <span class="text-muted">(293)</span>
+              </div>
+            </div>
+
+            <!-- Condition Section -->
+            <h5 class="mt-4 mb-3">Condition</h5>
+            <div class="condition-filters mb-4">
+              <div class="form-check custom-checkbox mb-2">
+                <input class="form-check-input" type="checkbox" id="usedCondition">
+                <label class="form-check-label d-flex justify-content-between w-100" for="usedCondition">
+                  Used
+                  <span class="text-muted">(45377)</span>
+                </label>
+              </div>
+              
+              <div class="form-check custom-checkbox mb-2">
+                <input class="form-check-input" type="checkbox" id="newCondition">
+                <label class="form-check-label d-flex justify-content-between w-100" for="newCondition">
+                  New
+                  <span class="text-muted">(5841)</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- KM's Driven Section -->
+            <h5 class="mt-4 mb-3">KM's driven</h5>
+            <div class="km-range mb-4">
+              <div class="d-flex gap-2">
+                <div class="flex-grow-1">
+                  <input type="number" class="form-control" placeholder="1" min="1">
+                  <small class="text-muted">Min</small>
+                </div>
+                <div class="flex-grow-1">
+                  <input type="number" class="form-control" placeholder="999,999" max="999999">
+                  <small class="text-muted">Max</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Year Section -->
+            <h5 class="mt-4 mb-3">Year</h5>
+            <div class="year-range mb-4">
+              <div class="d-flex gap-2">
+                <div class="flex-grow-1">
+                  <input type="number" class="form-control" placeholder="1900" min="1900">
+                  <small class="text-muted">From</small>
+                </div>
+                <div class="flex-grow-1">
+                  <input type="number" class="form-control" placeholder="2025" max="2025">
+                  <small class="text-muted">To</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Fuel Section -->
+            <h5 class="mt-4 mb-3">Fuel</h5>
+            <div class="fuel-filters mb-4">
+              <div class="form-check custom-checkbox mb-2">
+                <input class="form-check-input" type="checkbox" id="petrolFuel">
+                <label class="form-check-label d-flex justify-content-between w-100" for="petrolFuel">
+                  Petrol
+                  <span class="text-muted">(44911)</span>
+                </label>
+              </div>
+              
+              <div class="form-check custom-checkbox mb-2">
+                <input class="form-check-input" type="checkbox" id="hybridFuel">
+                <label class="form-check-label d-flex justify-content-between w-100" for="hybridFuel">
+                  Hybrid
+                  <span class="text-muted">(2401)</span>
+                </label>
+              </div>
+
+              <div class="form-check custom-checkbox mb-2">
+                <input class="form-check-input" type="checkbox" id="cngFuel">
+                <label class="form-check-label d-flex justify-content-between w-100" for="cngFuel">
+                  CNG
+                  <span class="text-muted">(1708)</span>
+                </label>
+              </div>
+
+              <div class="form-check custom-checkbox mb-2">
+                <input class="form-check-input" type="checkbox" id="dieselFuel">
+                <label class="form-check-label d-flex justify-content-between w-100" for="dieselFuel">
+                  Diesel
+                  <span class="text-muted">(1411)</span>
+                </label>
+              </div>
+
+              <div class="form-check custom-checkbox mb-2">
+                <input class="form-check-input" type="checkbox" id="lpgFuel">
+                <label class="form-check-label d-flex justify-content-between w-100" for="lpgFuel">
+                  LPG
+                  <span class="text-muted">(652)</span>
+                </label>
+              </div>
+
+              <div class="form-check custom-checkbox mb-2">
+                <input class="form-check-input" type="checkbox" id="electricFuel">
+                <label class="form-check-label d-flex justify-content-between w-100" for="electricFuel">
+                  Electric
+                  <span class="text-muted">(135)</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Transmission Section -->
+            <h5 class="mt-4 mb-3">Transmission</h5>
+            <div class="transmission-filters mb-4">
+              <div class="form-check custom-checkbox mb-2">
+                <input class="form-check-input" type="checkbox" id="manualTransmission">
+                <label class="form-check-label d-flex justify-content-between w-100" for="manualTransmission">
+                  Manual
+                  <span class="text-muted">(29851)</span>
+                </label>
+              </div>
+
+              <div class="form-check custom-checkbox mb-2">
+                <input class="form-check-input" type="checkbox" id="automaticTransmission">
+                <label class="form-check-label d-flex justify-content-between w-100" for="automaticTransmission">
+                  Automatic
+                  <span class="text-muted">(21366)</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Body Type Section -->
+            <h5 class="mt-4 mb-3">Body Type</h5>
+            <div class="body-type-filters mb-4">
+              <div class="form-check custom-checkbox mb-2">
+                <input class="form-check-input" type="checkbox" id="sedanType">
+                <label class="form-check-label d-flex justify-content-between w-100" for="sedanType">
+                  Sedan
+                  <span class="text-muted">(14605)</span>
+                </label>
+              </div>
+
+              <div class="form-check custom-checkbox mb-2">
+                <input class="form-check-input" type="checkbox" id="hatchbackType">
+                <label class="form-check-label d-flex justify-content-between w-100" for="hatchbackType">
+                  Hatchback
+                  <span class="text-muted">(10774)</span>
+                </label>
+              </div>
+
+              <div class="form-check custom-checkbox mb-2">
+                <input class="form-check-input" type="checkbox" id="otherType">
+                <label class="form-check-label d-flex justify-content-between w-100" for="otherType">
+                  Other
+                  <span class="text-muted">(10100)</span>
+                </label>
+              </div>
+
+              <div class="form-check custom-checkbox mb-2">
+                <input class="form-check-input" type="checkbox" id="smallCityType">
+                <label class="form-check-label d-flex justify-content-between w-100" for="smallCityType">
+                  Small city car
+                  <span class="text-muted">(8149)</span>
+                </label>
+              </div>
+
+              <div class="form-check custom-checkbox mb-2">
+                <input class="form-check-input" type="checkbox" id="suvType">
+                <label class="form-check-label d-flex justify-content-between w-100" for="suvType">
+                  SUV
+                  <span class="text-muted">(3302)</span>
+                </label>
+              </div>
+
+              <div class="form-check custom-checkbox mb-2">
+                <input class="form-check-input" type="checkbox" id="vanBusType">
+                <label class="form-check-label d-flex justify-content-between w-100" for="vanBusType">
+                  Van / Bus
+                  <span class="text-muted">(1472)</span>
+                </label>
+              </div>
+
+              <div class="form-check custom-checkbox mb-2">
+                <input class="form-check-input" type="checkbox" id="pickupType">
+                <label class="form-check-label d-flex justify-content-between w-100" for="pickupType">
+                  Pickup
+                  <span class="text-muted">(1008)</span>
+                </label>
+              </div>
+
+              <div class="form-check custom-checkbox mb-2">
+                <input class="form-check-input" type="checkbox" id="convertibleType">
+                <label class="form-check-label d-flex justify-content-between w-100" for="convertibleType">
+                  Convertible
+                  <span class="text-muted">(687)</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Features Section -->
+            <h5 class="mt-4 mb-3">Features</h5>
+            <div class="features-filters mb-4">
+              <div class="form-check custom-checkbox mb-2">
+                <input class="form-check-input" type="checkbox" id="powerSteering">
+                <label class="form-check-label d-flex justify-content-between w-100" for="powerSteering">
+                  Power Steering
+                  <span class="text-muted">(32256)</span>
+                </label>
+              </div>
+
+              <div class="form-check custom-checkbox mb-2">
+                <input class="form-check-input" type="checkbox" id="amFmRadio">
+                <label class="form-check-label d-flex justify-content-between w-100" for="amFmRadio">
+                  AM/FM Radio
+                  <span class="text-muted">(28821)</span>
+                </label>
+              </div>
+
+              <div class="form-check custom-checkbox mb-2">
+                <input class="form-check-input" type="checkbox" id="powerWindows">
+                <label class="form-check-label d-flex justify-content-between w-100" for="powerWindows">
+                  Power Windows
+                  <span class="text-muted">(28326)</span>
+                </label>
+              </div>
+
+              <div class="form-check custom-checkbox mb-2">
+                <input class="form-check-input" type="checkbox" id="bluetooth">
+                <label class="form-check-label d-flex justify-content-between w-100" for="bluetooth">
+                  Bluetooth System
+                  <span class="text-muted">(27956)</span>
+                </label>
+              </div>
+
+              <div class="form-check custom-checkbox mb-2">
+                <input class="form-check-input" type="checkbox" id="frontSpeakers">
+                <label class="form-check-label d-flex justify-content-between w-100" for="frontSpeakers">
+                  Front Speakers
+                  <span class="text-muted">(24851)</span>
+                </label>
+              </div>
+
+              <div class="form-check custom-checkbox mb-2">
+                <input class="form-check-input" type="checkbox" id="usbCharger">
+                <label class="form-check-label d-flex justify-content-between w-100" for="usbCharger">
+                  USB Charger
+                  <span class="text-muted">(24733)</span>
+                </label>
+              </div>
+
+              <div class="form-check custom-checkbox mb-2">
+                <input class="form-check-input" type="checkbox" id="powerMirrors">
+                <label class="form-check-label d-flex justify-content-between w-100" for="powerMirrors">
+                  Power Mirrors
+                  <span class="text-muted">(23361)</span>
+                </label>
+              </div>
+
+              <div class="form-check custom-checkbox mb-2">
+                <input class="form-check-input" type="checkbox" id="abs">
+                <label class="form-check-label d-flex justify-content-between w-100" for="abs">
+                  ABS
+                  <span class="text-muted">(23072)</span>
+                </label>
+              </div>
+
+              <div class="view-more mb-4">
+                <a href="#" class="text-primary text-decoration-none d-flex align-items-center">
+                  View more
+                  <i class="fas fa-chevron-right ms-1" style="font-size: 12px;"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Technical Details Link -->
+            <div class="technical-details mb-4">
+              <h5 class="mb-3">More technical details</h5>
+              <a href="#" class="text-primary text-decoration-none d-flex align-items-center">
+                View more
+                <i class="fas fa-chevron-right ms-1" style="font-size: 12px;"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content Area -->
+      <div class="col-md-9">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2 class="mb-0">Cars in Pakistan <span class="badge bg-info">10,000+ ads</span></h2>
+          <div class="d-flex align-items-center">
+            <span class="me-2">VIEW</span>
+            <div class="btn-group me-3">
+              <button class="btn btn-outline-secondary"><i class="fas fa-list"></i></button>
+              <button class="btn btn-outline-secondary"><i class="fas fa-th"></i></button>
+            </div>
+            <div class="dropdown">
+              <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                SORT BY: Newly listed
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Featured Product Card -->
+          <div class="col-12">
+            <div class="card border rounded w-100 product-card">
+              <div class="d-flex">
+                <!-- Left side - Image -->
+                <div class="position-relative image-container">
+                  <span class="badge bg-warning position-absolute" style="top: 10px; left: 10px; z-index: 1;">Featured</span>
+                  <img src="https://images.olx.com.pk/thumbnails/522657069-800x600.jpeg" alt="TV Video Audio">
+                </div>
+                
+                <!-- Right side - Content -->
+                <div class="p-3 flex-grow-1">
+                  <div class="d-flex justify-content-between align-items-start w-100">
+                    <div>
+                      <h3 class="fw-bold mb-1">Rs 1,350,000</h3>
+                      <p class="mb-2">Suzuki Cultus VXR 2013</p>
+                      <p class="text-muted small mb-3">Gulberge 3, Rawalpindi • 2 weeks ago</p>
+                    </div>
+                    <button class="btn btn-link border-0 p-0">
+                      <i class="far fa-heart"></i>
+                    </button>
+                  </div>
+                  
+                  <div class="mt-2">
+                    <button class="btn btn-outline-dark me-2" style="min-width: 100px;">
+                      <i class="fas fa-phone me-2"></i>Call
+                    </button>
+                    <button class="btn text-white" style="background-color: #002f34; min-width: 100px;">
+                      <i class="fas fa-comment me-2"></i>Chat
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Product Cards -->
+        <div class="card border rounded w-100 product-card">
+          <div class="d-flex">
+            <!-- Left side - Image -->
+            <div class="position-relative image-container">
+              <span class="badge bg-warning position-absolute" style="top: 10px; left: 10px; z-index: 1;">Featured</span>
+              <img src="https://images.olx.com.pk/thumbnails/522765458-800x600.jpeg" 
+                   alt="SMD LED Screen">
+            </div>
+            
+            <!-- Right side - Content -->
+            <div class="p-3 flex-grow-1">
+              <div class="d-flex justify-content-between align-items-start w-100">
+                <div>
+                  <h3 class="fw-bold mb-1">Rs 2,500,000</h3>
+                  <p class="mb-2">Mitsubishi Ek Wagon 2014</p>
+                  <p class="text-muted small mb-3">Saddar, Rawalpindi• 3 weeks ago</p>
+                </div>
+                <button class="btn btn-link border-0 p-0">
+                  <i class="far fa-heart"></i>
+                </button>
+              </div>
+              
+              <div class="mt-2">
+                <button class="btn btn-outline-dark me-2" style="min-width: 100px;">
+                  <i class="fas fa-phone me-2"></i>Call
+                </button>
+                <button class="btn text-white" style="background-color: #002f34; min-width: 100px;">
+                  <i class="fas fa-comment me-2"></i>Chat
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card border rounded w-100 product-card">
+          <div class="d-flex">
+            <!-- Left side - Image -->
+            <div class="position-relative image-container">
+              <span class="badge bg-warning position-absolute" style="top: 10px; left: 10px; z-index: 1;">Featured</span>
+              <img src="https://images.olx.com.pk/thumbnails/521297497-800x600.jpeg" 
+                   alt="Baofeng BF-888s">
+            </div>
+            
+            <!-- Right side - Content -->
+            <div class="p-3 flex-grow-1">
+              <div class="d-flex justify-content-between align-items-start w-100">
+                <div>
+                  <h3 class="fw-bold mb-1">Rs 54,999,000</h3>
+                  <p class="mb-2">Toyota Corolla Altis 2015</p>
+                  <p class="text-muted small mb-3">DHA Phase 1, Karachi • 4 weeks ago</p>
+                </div>
+                <button class="btn btn-link border-0 p-0">
+                  <i class="far fa-heart"></i>
+                </button>
+              </div>
+              
+              <div class="mt-2">
+                <button class="btn btn-outline-dark me-2" style="min-width: 100px;">
+                  <i class="fas fa-phone me-2"></i>Call
+                </button>
+                <button class="btn text-white" style="background-color: #002f34; min-width: 100px;">
+                  <i class="fas fa-comment me-2"></i>Chat
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card border rounded w-100 product-card">
+          <div class="d-flex">
+            <!-- Left side - Image -->
+            <div class="position-relative image-container">
+              <span class="badge bg-warning position-absolute" style="top: 10px; left: 10px; z-index: 1;">Featured</span>
+              <img src="https://images.olx.com.pk/thumbnails/522773628-800x600.jpeg" 
+                   alt="Walkie Talkie">
+            </div>
+            
+            <!-- Right side - Content -->
+            <div class="p-3 flex-grow-1">
+              <div class="d-flex justify-content-between align-items-start w-100">
+                <div>
+                  <h3 class="fw-bold mb-1">Rs 8,999,000</h3>
+                  <p class="mb-2">Suzuki Swift 2013</p>
+                  <p class="text-muted small mb-3">Jail Road , Faislabad • 2 weeks ago</p>
+                </div>
+                <button class="btn btn-link border-0 p-0">
+                  <i class="far fa-heart"></i>
+                </button>
+              </div>
+              
+              <div class="mt-2">
+                <button class="btn btn-outline-dark me-2" style="min-width: 100px;">
+                  <i class="fas fa-phone me-2"></i>Call
+                </button>
+                <button class="btn text-white" style="background-color: #002f34; min-width: 100px;">
+                  <i class="fas fa-comment me-2"></i>Chat
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Product Card -->
+        <div class="card border rounded w-100 product-card">
+          <div class="d-flex">
+            <!-- Left side - Image -->
+            <div class="position-relative image-container">
+              <span class="badge bg-warning position-absolute" style="top: 10px; left: 10px; z-index: 1;">Featured</span>
+              <img src="https://images.olx.com.pk/thumbnails/522770285-800x600.jpeg" 
+                   alt="iPad Pro">
+            </div>
+            
+            <!-- Right side - Content -->
+            <div class="p-3 flex-grow-1">
+              <div class="d-flex justify-content-between align-items-start w-100">
+                <div>
+                  <h3 class="fw-bold mb-1">Rs 125,000,000</h3>
+                  <p class="mb-2">Mercedes Benz S Class 2018</p>
+                  <p class="text-muted small mb-3">Bahria Town, Lahore • 1 week ago</p>
+                </div>
+                <button class="btn btn-link border-0 p-0">
+                  <i class="far fa-heart"></i>
+                </button>
+              </div>
+              
+              <div class="mt-2">
+                <button class="btn btn-outline-dark me-2" style="min-width: 100px;">
+                  <i class="fas fa-phone me-2"></i>Call
+                </button>
+                <button class="btn text-white" style="background-color: #002f34; min-width: 100px;">
+                  <i class="fas fa-comment me-2"></i>Chat
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Product Card -->
+        <div class="card border rounded w-100 product-card">
+          <div class="d-flex">
+            <!-- Left side - Image -->
+            <div class="position-relative image-container">
+              <span class="badge bg-warning position-absolute" style="top: 10px; left: 10px; z-index: 1;">Featured</span>
+              <img src="https://images.olx.com.pk/thumbnails/522748678-800x600.jpeg" 
+                   alt="Samsung Tablet">
+            </div>
+            
+            <!-- Right side - Content -->
+            <div class="p-3 flex-grow-1">
+              <div class="d-flex justify-content-between align-items-start w-100">
+                <div>
+                  <h3 class="fw-bold mb-1">Rs 45,999,000</h3>
+                  <p class="mb-2">Honda Accord 2017</p>
+                  <p class="text-muted small mb-3">Gulshan-e-Iqbal, Karachi • 3 days ago</p>
+                </div>
+                <button class="btn btn-link border-0 p-0">
+                  <i class="far fa-heart"></i>
+                </button>
+              </div>
+              
+              <div class="mt-2">
+                <button class="btn btn-outline-dark me-2" style="min-width: 100px;">
+                  <i class="fas fa-phone me-2"></i>Call
+                </button>
+                <button class="btn text-white" style="background-color: #002f34; min-width: 100px;">
+                  <i class="fas fa-comment me-2"></i>Chat
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+ <!-- Additional Product Card -->
+ <div class="card border rounded w-100 product-card">
+    <div class="d-flex">
+      <!-- Left side - Image -->
+      <div class="position-relative image-container">
+        <span class="badge bg-warning position-absolute" style="top: 10px; left: 10px; z-index: 1;">Featured</span>
+        <img src="https://images.olx.com.pk/thumbnails/522770285-800x600.jpeg" 
+             alt="iPad Pro">
+      </div>
+      
+      <!-- Right side - Content -->
+      <div class="p-3 flex-grow-1">
+        <div class="d-flex justify-content-between align-items-start w-100">
+          <div>
+            <h3 class="fw-bold mb-1">Rs 125,000,000</h3>
+            <p class="mb-2">Mercedes Benz S Class 2018</p>
+            <p class="text-muted small mb-3">Bahria Town, Lahore • 1 week ago</p>
+          </div>
+          <button class="btn btn-link border-0 p-0">
+            <i class="far fa-heart"></i>
+          </button>
+        </div>
+        
+        <div class="mt-2">
+          <button class="btn btn-outline-dark me-2" style="min-width: 100px;">
+            <i class="fas fa-phone me-2"></i>Call
+          </button>
+          <button class="btn text-white" style="background-color: #002f34; min-width: 100px;">
+            <i class="fas fa-comment me-2"></i>Chat
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+        <!-- Product Cards Container -->
+        <div class="container mt-4">
+          <div class="row">
+            <!-- Product Cards -->
+            <div class="card border rounded w-100 product-card">
+              <div class="d-flex">
+                <div class="position-relative image-container">
+                  <span class="badge bg-warning position-absolute" style="top: 10px; left: 10px; z-index: 1;">Featured</span>
+                  <img src="https://images.olx.com.pk/thumbnails/522759378-800x600.jpeg" 
+                       alt="iPhone 14 Pro Max"
+                       style="width: 200px; height: 200px; object-fit: cover;">
+                </div>
+                
+                <div class="p-3 flex-grow-1">
+                  <div class="d-flex justify-content-between align-items-start w-100">
+                    <div>
+                      <h3 class="fw-bold mb-1">Rs 449,999,000</h3>
+                      <p class="mb-2">Toyota Corolla Altis 2015</p>
+                      <p class="text-muted small mb-3">DHA Phase 6, Karachi • 2 days ago</p>
+                    </div>
+                    <button class="btn btn-link border-0 p-0">
+                      <i class="far fa-heart"></i>
+                    </button>
+                  </div>
+                  
+                  <div class="mt-2">
+                    <button class="btn btn-outline-dark me-2" style="min-width: 100px;">
+                      <i class="fas fa-phone me-2"></i>Call
+                    </button>
+                    <button class="btn text-white" style="background-color: #002f34; min-width: 100px;">
+                      <i class="fas fa-comment me-2"></i>Chat
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card border rounded w-100 product-card">
+              <div class="d-flex">
+                <div class="position-relative image-container">
+                  <span class="badge bg-warning position-absolute" style="top: 10px; left: 10px; z-index: 1;">Featured</span>
+                  <img src="https://images.olx.com.pk/thumbnails/522744473-800x600.jpeg" 
+                       alt="Samsung S23 Ultra"
+                       style="width: 200px; height: 200px; object-fit: cover;">
+                </div>
+                
+                <div class="p-3 flex-grow-1">
+                  <div class="d-flex justify-content-between align-items-start w-100">
+                    <div>
+                      <h3 class="fw-bold mb-1">Rs 389,999,000</h3>
+                      <p class="mb-2">Toyota Corolla Altis 2015</p>
+                      <p class="text-muted small mb-3">Gulberg III, Lahore • 1 week ago</p>
+                    </div>
+                    <button class="btn btn-link border-0 p-0">
+                      <i class="far fa-heart"></i>
+                    </button>
+                  </div>
+                  
+                  <div class="mt-2">
+                    <button class="btn btn-outline-dark me-2" style="min-width: 100px;">
+                      <i class="fas fa-phone me-2"></i>Call
+                    </button>
+                    <button class="btn text-white" style="background-color: #002f34; min-width: 100px;">
+                      <i class="fas fa-comment me-2"></i>Chat
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card border rounded w-100 product-card">
+              <div class="d-flex">
+                <div class="position-relative image-container">
+                  <span class="badge bg-warning position-absolute" style="top: 10px; left: 10px; z-index: 1;">Featured</span>
+                  <img src="https://images.olx.com.pk/thumbnails/522759378-800x600.jpeg" 
+                       alt="Google Pixel 7 Pro"
+                       style="width: 200px; height: 200px; object-fit: cover;">
+                </div>
+                
+                <div class="p-3 flex-grow-1">
+                  <div class="d-flex justify-content-between align-items-start w-100">
+                    <div>
+                      <h3 class="fw-bold mb-1">Rs 259,999,000</h3>
+                      <p class="mb-2">Toyota Corolla Altis 2015</p>
+                      <p class="text-muted small mb-3">F-11, Islamabad • 5 days ago</p>
+                    </div>
+                    <button class="btn btn-link border-0 p-0">
+                      <i class="far fa-heart"></i>
+                    </button>
+                  </div>
+                  
+                  <div class="mt-2">
+                    <button class="btn btn-outline-dark me-2" style="min-width: 100px;">
+                      <i class="fas fa-phone me-2"></i>Call
+                    </button>
+                    <button class="btn text-white" style="background-color: #002f34; min-width: 100px;">
+                      <i class="fas fa-comment me-2"></i>Chat
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+             <!-- Additional Product Card -->
+        <div class="card border rounded w-100 product-card">
+            <div class="d-flex">
+              <!-- Left side - Image -->
+              <div class="position-relative image-container">
+                <span class="badge bg-warning position-absolute" style="top: 10px; left: 10px; z-index: 1;">Featured</span>
+                <img src="https://images.olx.com.pk/thumbnails/522770285-800x600.jpeg" 
+                     alt="iPad Pro">
+              </div>
+              
+              <!-- Right side - Content -->
+              <div class="p-3 flex-grow-1">
+                <div class="d-flex justify-content-between align-items-start w-100">
+                  <div>
+                    <h3 class="fw-bold mb-1">Rs 125,000,000</h3>
+                    <p class="mb-2">Mercedes Benz S Class 2018</p>
+                    <p class="text-muted small mb-3">Bahria Town, Lahore • 1 week ago</p>
+                  </div>
+                  <button class="btn btn-link border-0 p-0">
+                    <i class="far fa-heart"></i>
+                  </button>
+                </div>
+                
+                <div class="mt-2">
+                  <button class="btn btn-outline-dark me-2" style="min-width: 100px;">
+                    <i class="fas fa-phone me-2"></i>Call
+                  </button>
+                  <button class="btn text-white" style="background-color: #002f34; min-width: 100px;">
+                    <i class="fas fa-comment me-2"></i>Chat
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+
+            <!-- OnePlus Card (Second Last) -->
+            <div class="card border rounded w-100 product-card">
+              <div class="d-flex">
+                <div class="position-relative image-container">
+                  <span class="badge bg-warning position-absolute" style="top: 10px; left: 10px; z-index: 1;">Featured</span>
+                  <img src="https://images.olx.com.pk/thumbnails/522780424-800x600.jpeg" 
+                       alt="OnePlus 11"
+                       style="width: 200px; height: 200px; object-fit: cover;">
+                </div>
+                
+                <div class="p-3 flex-grow-1">
+                  <div class="d-flex justify-content-between align-items-start w-100">
+                    <div>
+                      <h3 class="fw-bold mb-1">Rs 219,999,000</h3>
+                      <p class="mb-2">Toyota Corolla Altis 2015</p>
+                      <p class="text-muted small mb-3">Johar Town, Lahore • 1 day ago</p>
+                    </div>
+                    <button class="btn btn-link border-0 p-0">
+                      <i class="far fa-heart"></i>
+                    </button>
+                  </div>
+                  
+                  <div class="mt-2">
+                    <button class="btn btn-outline-dark me-2" style="min-width: 100px;">
+                      <i class="fas fa-phone me-2"></i>Call
+                    </button>
+                    <button class="btn text-white" style="background-color: #002f34; min-width: 100px;">
+                      <i class="fas fa-comment me-2"></i>Chat
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- OPPO Card (Last) -->
+            <div class="card border rounded w-100 product-card">
+              <div class="d-flex">
+                <div class="position-relative image-container">
+                  <span class="badge bg-warning position-absolute" style="top: 10px; left: 10px; z-index: 1;">Featured</span>
+                  <img src="https://images.olx.com.pk/thumbnails/521934899-800x600.jpeg" 
+                       alt="OPPO Find X5 Pro"
+                       style="width: 200px; height: 200px; object-fit: cover;">
+                </div>
+                
+                <div class="p-3 flex-grow-1">
+                  <div class="d-flex justify-content-between align-items-start w-100">
+                    <div>
+                      <h3 class="fw-bold mb-1">Rs 184,999,000</h3>
+                      <p class="mb-2">Toyota Corolla Altis 2015</p>
+                      <p class="text-muted small mb-3">Clifton, Karachi • 3 days ago</p>
+                    </div>
+                    <button class="btn btn-link border-0 p-0">
+                      <i class="far fa-heart"></i>
+                    </button>
+                  </div>
+                  
+                  <div class="mt-2">
+                    <button class="btn btn-outline-dark me-2" style="min-width: 100px;">
+                      <i class="fas fa-phone me-2"></i>Call
+                    </button>
+                    <button class="btn text-white" style="background-color: #002f34; min-width: 100px;">
+                      <i class="fas fa-comment me-2"></i>Chat
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <div class="footer1 container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="footerimg col col-6 col-sm-6 col-md-4">
+          <img src="./images/Fimg.webp" alt="">
+        </div>
+        <div class="footercontent col col-6 col-sm-6 col-md-4">
+          <h2 class="mt-3">TRY THE OLX APP</h2>
+          <p>Buy, sell and find just about anything using the app on your mobile.</p>
+        </div>
+        <div class="footerapp col col-12 col-sm-12 col-md-4">
+          <div>
+            <p class="mt-5">GET YOUR APP Today</p>
+          </div>
+          <img src="./images/appicon1.svg" alt="">
+          <img src="./images/appicon2.svg" alt="">
+          <img src="./images/appicon3.svg" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer2 container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="footer2content col col-6 col-sm-4 col-md-2">
+          <h5 class="mt-3">POPULAR CATEGORIES</h5>
+          <p>Cars</p>
+          <p>Flats for rent</p>
+          <p>Mobile Phones</p>
+          <p>Jobs</p>
+        </div>
+        <div class="footer2content col col-6 col-sm-4 col-md-2">
+          <h5 class="mt-3">TRENDING SEARCHES</h5>
+          <p>Bikes</p>
+          <p>Watches</p>
+          <p>Books</p>
+          <p>Dogs</p>
+        </div>
+        <div class="footer2content col col-6 col-sm-4 col-md-3">
+          <h5 class="mt-3">ABOUT US</h5>
+          <p>About EMPG</p>
+          <p>OLX Blog</p>
+          <p>Contact US</p>
+          <p>OLX for Businesses</p>
+        </div>
+        <div class="footer2content col col-6 col-sm-4 col-md-2">
+          <h5 class="mt-3">OLX</h5>
+          <p>Help</p>
+          <p>Sitemap</p>
+          <p>Terms of use</p>
+          <p>Privacy Policy</p>
+        </div>
+        <div class="footerapp2 col col-12 col-sm-6 col-md-3">
+          <div>
+            <p class="mt-3">FOLLOW US</p>
+          </div>
+          <div>
+            <img src="./images/F1.svg" class="footerappimg">
+            <img src="./images/F2.svg" class="footerappimg">
+            <img src="./images/F3.svg" class="footerappimg">
+            <img src="./images/F4.svg" class="footerappimg">
+          </div>
+          <div>
+            <img src="./images/appicon1.svg" class="footerappimg2">
+            <img src="./images/appicon2.svg" class="footerappimg2">
+            <img src="./images/appicon3.svg" class="footerappimg2">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer3 container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col col-12">
+          <p> <b> Free Classifieds in Pakistan </b>. © 2006-2022 OLX</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="main.js"></script>
+  <script src="app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+</body>
+</html> 

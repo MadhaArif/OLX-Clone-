@@ -117,40 +117,40 @@
     <div>
       <ul class="categories-list col ">
         <li class="nav-item col" id="Cat-list">
-          <a class="nav-link dropdown-toggle avtive" id="nav-link" href="#" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
+          <a class="nav-link dropdown-toggle category-link" id="nav-link" href="#" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false" data-category="all">
             ALL CATEGORIES
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="mobile.html">Mobile</a></li>
-            <li><a class="dropdown-item" href="cars.html">Cars</a></li>
-            <li><a class="dropdown-item" href="motorcycles.html">Motorcycles</a></li>
-            <li><a class="dropdown-item" href="houses.html">Houses</a></li>
-            <li><a class="dropdown-item" href="tv-video-audio.html">TV-Video-Audio</a></li>
-            <li><a class="dropdown-item" href="tablets.html">Tablets</a></li>
-            <li><a class="dropdown-item" href="land-and-plots.html">Land & Plots</a></li>
+            <li><a class="dropdown-item category-link" href="mobile.html" data-category="mobile">Mobile</a></li>
+            <li><a class="dropdown-item category-link" href="cars.html" data-category="cars">Cars</a></li>
+            <li><a class="dropdown-item category-link" href="motorcycles.html" data-category="motorcycles">Motorcycles</a></li>
+            <li><a class="dropdown-item category-link" href="houses.html" data-category="houses">Houses</a></li>
+            <li><a class="dropdown-item category-link" href="tv-video-audio.html" data-category="tv">TV-Video-Audio</a></li>
+            <li><a class="dropdown-item category-link" href="tablets.html" data-category="tablets">Tablets</a></li>
+            <li><a class="dropdown-item category-link" href="land-and-plots.html" data-category="land">Land & Plots</a></li>
           </ul>
         </li>
-        <li class="nav-item col ">
-          <a class="nav-link" href="mobile.html">Mobile Phones</a>
+        <li class="nav-item col">
+          <a class="nav-link category-link" href="mobile.html" data-category="mobile">Mobile Phones</a>
         </li>
         <li class="nav-item col">
-          <a class="nav-link" href="cars.html">Cars</a>
+          <a class="nav-link category-link" href="cars.html" data-category="cars">Cars</a>
         </li>
         <li class="nav-item col">
-          <a class="nav-link" href="motorcycles.html">Motorcycles</a>
+          <a class="nav-link category-link" href="motorcycles.html" data-category="motorcycles">Motorcycles</a>
         </li>
         <li class="nav-item col">
-          <a class="nav-link" href="houses.html">Houses</a>
+          <a class="nav-link category-link" href="houses.html" data-category="houses">Houses</a>
         </li>
         <li class="nav-item col">
-          <a class="nav-link" href="tv-video-audio.html">TV-Video-Audio</a>
+          <a class="nav-link category-link" href="tv-video-audio.html" data-category="tv">TV-Video-Audio</a>
         </li>
         <li class="nav-item col">
-          <a class="nav-link" href="tablets.html">Tablets</a>
+          <a class="nav-link category-link" href="tablets.html" data-category="tablets">Tablets</a>
         </li>
         <li class="nav-item col">
-          <a class="nav-link" href="land-and-plots.html">Land & Plots</a>
+          <a class="nav-link category-link" href="land-and-plots.html" data-category="land">Land & Plots</a>
         </li>
       </ul>
     </div>
@@ -502,6 +502,12 @@
       height: 0;
       overflow: hidden;
     }
+
+    .category-link.active {
+      color: #002f34 !important;
+      font-weight: bold;
+      text-decoration: underline;
+    }
   </style>
 
   <script>
@@ -657,6 +663,41 @@
             messages.scrollTop = messages.scrollHeight;
         }, 300);
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get all category links
+        const categoryLinks = document.querySelectorAll('.category-link');
+        
+        // Get current page path
+        const currentPath = window.location.pathname;
+        
+        // Set active state based on current page
+        categoryLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPath.split('/').pop()) {
+                link.classList.add('active');
+            }
+            
+            // Add click handler
+            link.addEventListener('click', function(e) {
+                // Remove active class from all links
+                categoryLinks.forEach(l => l.classList.remove('active'));
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Store active category in localStorage
+                localStorage.setItem('activeCategory', this.dataset.category);
+            });
+        });
+        
+        // Check localStorage for active category on page load
+        const activeCategory = localStorage.getItem('activeCategory');
+        if (activeCategory) {
+            const activeLink = document.querySelector(`.category-link[data-category="${activeCategory}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        }
+    });
   </script>
 
   <script src="main.js"></script>

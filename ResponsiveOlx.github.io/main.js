@@ -171,3 +171,41 @@ function post() {
   // sessionStorage.setItem("SetData", JSON.stringify(data));
   // console.log(setdata);
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all category links
+    const categoryLinks = document.querySelectorAll('.category-link');
+    
+    // Get current page path
+    const currentPath = window.location.pathname;
+    const currentPage = currentPath.split('/').pop() || 'index.html';
+    
+    // Set active state based on current page
+    categoryLinks.forEach(link => {
+        if (link.getAttribute('href') === currentPage) {
+            link.classList.add('active');
+        }
+        
+        // Add click handler
+        link.addEventListener('click', function(e) {
+            // Store the clicked category before navigation
+            localStorage.setItem('activeCategory', this.dataset.category);
+        });
+    });
+    
+    // Check localStorage for active category on page load
+    const activeCategory = localStorage.getItem('activeCategory');
+    if (activeCategory) {
+        const activeLink = document.querySelector(`.category-link[data-category="${activeCategory}"]`);
+        if (activeLink) {
+            activeLink.classList.add('active');
+        }
+    }
+});
+
+// Add this to your existing CSS or style.css file
+.category-link.active {
+    color: #002f34 !important;
+    font-weight: bold;
+    text-decoration: underline;
+}
